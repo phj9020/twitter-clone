@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "routes/Home";
+import Auth from "routes/Auth";
 
-import Home from "../routes/Home";
-import Auth from "../routes/Auth";
-
-const MainRouter = () => {
-  // 기본적으로 로그인 안된 상태
-const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+const MainRouter = ({isLoggedIn}) => {
   return (
     <Router>
     <Switch>

@@ -1,4 +1,7 @@
+// Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from "firebase/app";
+// Add the Firebase products that you want to use
+import "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -10,4 +13,7 @@ const firebaseConfig = {
     appId:process.env.REACT_APP_APP_ID
   };
   // Initialize Firebase
-  export default firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+// 서비스만 export 
+export const authService = firebase.auth();
