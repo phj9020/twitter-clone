@@ -56,7 +56,6 @@ const Auth = ()=> {
         //sign In with popup
         const data = await authService.signInWithPopup(provider)
         console.log(data)
-
     }
 
     return(

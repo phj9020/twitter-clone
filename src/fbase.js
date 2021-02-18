@@ -2,6 +2,7 @@
 import firebase from "firebase/app";
 // Add the Firebase products that you want to use
 import "firebase/auth";
+import "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,3 +21,5 @@ export const firebaseInstance = firebase;
 
 // 서비스만 export 
 export const authService = firebase.auth();
+
+export const dbService = firebase.firestore();
