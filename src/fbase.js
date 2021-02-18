@@ -15,5 +15,8 @@ const firebaseConfig = {
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// instance from firebase module
+export const firebaseInstance = firebase;
+
 // 서비스만 export 
 export const authService = firebase.auth();
