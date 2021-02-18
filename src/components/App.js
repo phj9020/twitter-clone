@@ -6,6 +6,7 @@ function App() {
   // 기본적으로 로그인 안된 상태
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userObj, setUserObj] = useState(null);
   //console.log(isLoggedIn); // null 인 이뉴는 firebase가 초기화되고 모든걸 로드할떄까지 기다려줄 시간이 없기때문
   
   // state의 변화를 듣고 있다 
@@ -13,6 +14,7 @@ function App() {
     authService.onAuthStateChanged((user)=>{
       if(user) {
         setIsLoggedIn(true);
+        setUserObj(user)
       } else {
         setIsLoggedIn(false)
       }
@@ -23,7 +25,7 @@ function App() {
 
   return (
     <>
-      {init ? <MainRouter isLoggedIn={isLoggedIn}/> : "Initializing..." }
+      {init ? <MainRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing..." }
       <footer>&copy; CloneTwitter {new Date().getFullYear()}</footer>
     </>
   );
