@@ -6,7 +6,8 @@ const Home = ({userObj})=> {
     //console.log(userObj.uid) // 안에 uid
     const [tweet, setTweet] = useState("");
     const [tweets, setTweets] = useState([]);
-
+    const [file, setFile] = useState();
+  
     /* ver 1. 실시간이 아님
     const getTweets = async()=> {
         // dbTweets : QuerySnapshot 
@@ -38,8 +39,6 @@ const Home = ({userObj})=> {
         })
     },[])
 
-
-
     const onSubmit = async (event)=>{
         event.preventDefault();
         // create collection in firestore 
@@ -56,11 +55,38 @@ const Home = ({userObj})=> {
         setTweet(value);
     }
 
+    const onFileChange = (event) => {
+        const {target : { files }}= event;
+        // input의 모든 파일 중 첫번째 파일만 받는다 
+        const theFile = files[0];
+
+        // 1. create reader using fileReader API 
+        const reader = new FileReader();
+        // 2. add eventlister to reader (when loadingEnd get result and setFile(result) )
+        reader.onloadend = (finishedevent) => {
+            const {currentTarget : {result}}= finishedevent;
+            console.log(result);
+            setFile(result);
+        }
+        // 3. start to read as DataURL ( 문자열로 뿌려준다 ) 
+        reader.readAsDataURL(theFile)
+    }
+
+    const onClearFile = ()=>{
+        setFile(null);
+    }
+
     return(
         <div>
             <form onSubmit={onSubmit}>
                 <input type="text" placeholder="What's on Your Mind?" maxLength="120" value={tweet} onChange={onChange}/>
+                <input type="file"  accept="image/*" onChange={onFileChange}/>
                 <input type="submit" value="Tweet" />
+                {file && 
+                    <div>
+                        <img src={file} alt="Attached" width="50px" height="50px"/>
+                        <button onClick={onClearFile}>Clear</button>
+                    </div>}
             </form>
             <div>
                 {tweets.map((item) => <Tweet key={item.id} tweetObj={item} isOwner={item.creatorId === userObj.uid}/>)}

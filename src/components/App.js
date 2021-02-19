@@ -8,8 +8,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   //console.log(isLoggedIn); // null 인 이뉴는 firebase가 초기화되고 모든걸 로드할떄까지 기다려줄 시간이 없기때문
-  
-  // state의 변화를 듣고 있다 
+
+  //  onAuthStateChanged는 state의 변화를 듣고 있다 
   useEffect(()=>{
     authService.onAuthStateChanged((user)=>{
       if(user) {
@@ -26,7 +26,6 @@ function App() {
   return (
     <>
       {init ? <MainRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing..." }
-      <footer>&copy; CloneTwitter {new Date().getFullYear()}</footer>
     </>
   );
 }

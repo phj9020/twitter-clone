@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { dbService } from "fbase";
 
 const Tweet = ({ tweetObj, isOwner }) => {
-    const [editing, setEditing] = useState(false);
-    const [newTweet, setNewTweet] = useState(tweetObj.text);
-    console.log(tweetObj, newTweet);
+  const [editing, setEditing] = useState(false);
+  const [newTweet, setNewTweet] = useState(tweetObj.text);
+  console.log(tweetObj, newTweet);
 
   const onDeleteClick = () => {
     const ok = window.confirm("Are you sure you want to Delete this Tweet?");
@@ -18,27 +18,40 @@ const Tweet = ({ tweetObj, isOwner }) => {
 
   const toggleEditing = () => setEditing((prev) => !prev);
 
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setNewTweet(value);
+  };
 
-  const onChange=(event)=> {
-    const {target :{value}}= event;
-    setNewTweet(value)
-  }
-
-  const onSubmit = (event) =>{
+  const onSubmit = (event) => {
     event.preventDefault();
-    dbService.collection("tweets").doc(`${tweetObj.id}`).update({text: newTweet});
+    dbService
+      .collection("tweets")
+      .doc(`${tweetObj.id}`)
+      .update({ text: newTweet });
     setEditing(false);
-  }
+  };
 
   return (
     <>
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
-            <input value={newTweet} placeholder="Edit Your Tweet" onChange={onChange} required />
-            <input type="submit" value="Update Tweet" />
-          </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          {isOwner && (
+            <>
+              <form onSubmit={onSubmit}>
+                <input
+                  value={newTweet}
+                  placeholder="Edit Your Tweet"
+                  onChange={onChange}
+                  required
+                />
+                <input type="submit" value="Update Tweet" />
+              </form>
+              <button onClick={toggleEditing}>Cancel</button>
+            </>
+          )}
         </>
       ) : (
         <>
