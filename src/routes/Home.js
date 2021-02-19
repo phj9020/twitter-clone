@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {dbService} from 'fbase';
+import Tweet from 'components/Tweet';
 
 const Home = ({userObj})=> {
-    //console.log(userObj) // 안에 uid
+    //console.log(userObj.uid) // 안에 uid
     const [tweet, setTweet] = useState("");
     const [tweets, setTweets] = useState([]);
 
@@ -24,12 +25,15 @@ const Home = ({userObj})=> {
 
     useEffect(()=>{
         // getTweets();
-        // Ver 2. 실시간 
+        // Ver 2. 실시간  onSnapshot 데이터베이스에 무슨일이 있을 때 알림을 받음 
         dbService.collection("tweets").onSnapshot(snapshot => {
+            //console.log(snapshot.docs)
             const tweetsArray= snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
-            }));
+            })
+            );
+            console.log(tweetsArray)
             setTweets(tweetsArray)
         })
     },[])
@@ -58,9 +62,9 @@ const Home = ({userObj})=> {
                 <input type="text" placeholder="What's on Your Mind?" maxLength="120" value={tweet} onChange={onChange}/>
                 <input type="submit" value="Tweet" />
             </form>
-            <ul>
-                {tweets.map((item) => <li key={item.id} id={item.id}>{item.text}</li>)}
-            </ul>
+            <div>
+                {tweets.map((item) => <Tweet key={item.id} tweetObj={item} isOwner={item.creatorId === userObj.uid}/>)}
+            </div>
         </div>
     )
 }
