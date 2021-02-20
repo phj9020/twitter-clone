@@ -12,8 +12,10 @@ const Tweet = ({ tweetObj, isOwner }) => {
       // delete tweet
       // tweetObj에는 tweets 어레이가 있고 이 어레이 안에는 doc.id가 있다
       // dbService.doc(`tweets/${tweetObj.id}`).delete();
+      // fireStore의 해당 문서 삭제 
       dbService.collection("tweets").doc(`${tweetObj.id}`).delete();
-      // storageService.refFromURL(tweetObj.fileUrl).delete();
+      // storage의 파일 삭제 
+      storageService.refFromURL(tweetObj.fileUrl).delete();
     }
   };
 

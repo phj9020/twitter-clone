@@ -4,6 +4,7 @@ import Tweet from 'components/Tweet';
 import { v4 as uuidv4 } from 'uuid';
 
 const Home = ({userObj})=> {
+    console.log(userObj)
     //console.log(userObj.uid) // 안에 uid
     const [tweet, setTweet] = useState("");
     const [tweets, setTweets] = useState([]);
@@ -51,7 +52,7 @@ const Home = ({userObj})=> {
             // child(이미지의 path)
             const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
             console.log(fileRef)
-            // 2. send data to reference ( return UploadTaskSnapshot )
+            // 2. send data to storage ( return UploadTaskSnapshot )
             const response = await fileRef.putString(file, "data_url");
             console.log(response)
             // 3. get download Url from response 
