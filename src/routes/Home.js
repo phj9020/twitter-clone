@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {dbService} from 'fbase';
+import {dbService, storageService} from 'fbase';
 import Tweet from 'components/Tweet';
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = ({userObj})=> {
     //console.log(userObj.uid) // 안에 uid
     const [tweet, setTweet] = useState("");
     const [tweets, setTweets] = useState([]);
-    const [file, setFile] = useState();
+    const [file, setFile] = useState("");
   
     /* ver 1. 실시간이 아님
     const getTweets = async()=> {
@@ -41,13 +42,31 @@ const Home = ({userObj})=> {
 
     const onSubmit = async (event)=>{
         event.preventDefault();
-        // create collection in firestore 
-        await dbService.collection("tweets").add({
-            text: tweet,
-            createdAt: Date.now(),
-            creatorId: userObj.uid
-        });
-        setTweet("");
+        let fileUrl = "";
+
+        if(file !== "") {
+            // 사진이 있으면 업로드
+            // 사진의 url을 받아서 URL을 tweet에 추가한다
+            // 1. make child : file에 대한 reference 생성 return ReferenceCompat
+            // child(이미지의 path)
+            const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+            console.log(fileRef)
+            // 2. send data to reference ( return UploadTaskSnapshot )
+            const response = await fileRef.putString(file, "data_url");
+            console.log(response)
+            // 3. get download Url from response 
+            fileUrl = await response.ref.getDownloadURL();
+        }
+            const tweetObj = {
+                text : tweet,
+                createdAt: Date.now(),
+                creatorId: userObj.uid,
+                fileUrl: fileUrl
+            }
+            // 4. create collection in firestore 
+            await dbService.collection("tweets").add(tweetObj);
+            setTweet(""); 
+            setFile("");
     }
 
     const onChange = (event) => {
@@ -68,12 +87,12 @@ const Home = ({userObj})=> {
             console.log(result);
             setFile(result);
         }
-        // 3. start to read as DataURL ( 문자열로 뿌려준다 ) 
-        reader.readAsDataURL(theFile)
+        // 3. start to read as DataURL ( 문자열로 변환 ) 
+            reader.readAsDataURL(theFile);
     }
 
     const onClearFile = ()=>{
-        setFile(null);
+        setFile("");
     }
 
     return(
