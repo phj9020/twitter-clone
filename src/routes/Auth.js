@@ -1,46 +1,29 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {authService , firebaseInstance} from "fbase";
+import AuthForm from "components/AuthForm";
+import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 
+const Container = styled.div`
+    height:100vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+`
+
+const SocialLogin = styled.div`
+    button {
+        width: 225px;
+        height: 50px;
+        margin-right: 10px;
+        cursor: pointer;
+        border-radius: 25px;
+    }
+`
 
 const Auth = ()=> {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [newAccount, setNewAccount] = useState(true);
-    const [error, setError] = useState("");
-
-    console.log(email, password, newAccount)
-
-    const onChange = (event) => {
-        // event.target.name = input has name attribute 
-        const { target : { name, value}} = event;
-        if (name === "email") {
-            setEmail(value)
-        } else if (name === "password") {
-            setPassword(value)
-        }
-    }
-    
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        // firebase로 create, login
-        try{
-            let data;
-            if(newAccount === true) {
-                data = await authService.createUserWithEmailAndPassword(email, password)
-            } else if(newAccount === false) {
-                data = await authService.signInWithEmailAndPassword(email, password)
-                console.log(data)
-            }
-        } catch(error) {
-            setError(error.message)
-        }
-    }
-
-    const toggleAccount = () =>{
-        // 이전에 갖고있던 값의 반대를 적용시킨다 
-        setNewAccount(prev => !prev);
-    }
-
     const onSocialClick = async (event) => {
         event.preventDefault();
         const {target: {name}} = event;
@@ -59,20 +42,13 @@ const Auth = ()=> {
     }
 
     return(
-        <>
-            <h2>Log In</h2>
-            <form onSubmit={onSubmit}>
-                <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange}/>
-                <input name="password" type="password" placeholder="Password(6 characters minimun)" minLength="6" required value={password} onChange={onChange} autoComplete="true" />
-                <input type="submit" value={newAccount ? "Create Account" : "Sign In"} />
-                {error}
-            </form>
-            <span onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account" }</span>
-            <div>
-                <button name="google" onClick={onSocialClick}>Continue with Google Account</button> 
-                <button name="github" onClick={onSocialClick}>Continue with Github Account</button> 
-            </div>
-        </>
+        <Container>
+            <AuthForm />
+            <SocialLogin>
+                <button name="google" onClick={onSocialClick}>Continue with Google <FontAwesomeIcon icon={faGoogle} /></button> 
+                <button name="github" onClick={onSocialClick}>Continue with Github <FontAwesomeIcon icon={faGithub} /></button> 
+            </SocialLogin>
+        </Container>
     )
 }
 

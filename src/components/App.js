@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MainRouter from "components/Router";
 import { authService } from "fbase";
+import PropTypes from 'prop-types';
+import GlobalStyle from 'components/GlobalStyle';
 
 function App() {
   // 기본적으로 로그인 안된 상태
@@ -38,9 +40,17 @@ function App() {
 
   return (
     <>
+      <GlobalStyle />
       {init ? <MainRouter isLoggedIn={isLoggedIn} userObj={userObj} refreshUser={refreshUser} /> : "Initializing..." }
     </>
   );
 }
 
 export default App;
+
+
+App.propTypes = {
+  init : PropTypes.bool,
+  isLoggedIn : PropTypes.bool,
+  userObj: PropTypes.object
+} 
