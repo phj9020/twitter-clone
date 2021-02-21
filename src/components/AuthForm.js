@@ -35,6 +35,12 @@ const Form = styled.form`
     }
 `
 
+const ErrorMessage = styled.div`
+    text-align: center;
+    margin-bottom: 20px;
+`
+
+
 const SwithBtn = styled.span`
     display:block;
     text-decoration: underline;
@@ -75,6 +81,8 @@ const AuthForm = () => {
         }
     }
 
+   
+
     const toggleAccount = () =>{
         // 이전에 갖고있던 값의 반대를 적용시킨다 
         setNewAccount(prev => !prev);
@@ -88,7 +96,7 @@ const AuthForm = () => {
                 <input name="email" type="email" placeholder="Email" required value={email} onChange={onChange}/>
                 <input name="password" type="password" placeholder="Password (6 characters minimun)" minLength="6" required value={password} onChange={onChange} autoComplete="true" />
                 <input type="submit" value={newAccount ? "Create Account" : "Sign In"} />
-                {error}
+                <ErrorMessage>{error}</ErrorMessage>
             </Form>
             <SwithBtn onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account" }</SwithBtn>
         </FormContainer>
