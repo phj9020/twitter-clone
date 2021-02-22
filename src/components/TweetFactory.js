@@ -77,7 +77,7 @@ const ImagePreview = styled.div`
 const TweetFactory = ({userObj}) => {
     const [tweet, setTweet] = useState("");
     const [file, setFile] = useState("");
-    
+
     const onSubmit = async (event)=>{
         event.preventDefault();
         let fileUrl = "";

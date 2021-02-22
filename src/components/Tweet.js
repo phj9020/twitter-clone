@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 60px;
+  min-height: 150px;
   background-color: white;
   margin-bottom: 40px;
   color: black;
@@ -13,25 +13,29 @@ const Container = styled.div`
   border-radius: 10px;
 
   h4 {
-    width: 100%;
+    width: 80%;
     font-size: 16px;
     display: flex;
     align-items: center;
-    text-indent: 10px;
+    text-align:justify;
+    padding: 10px;
+    line-height: 1.5;
   }
+  
   img {
     position: absolute;
-    right: 0px;
-    bottom: -25px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    right: 10px;
+    top: 40px;
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
   }
 
 `
 
 const BtnContainer = styled.div`
-    position: relative;
+    position: absolute;
+    right: 0;
 `
 
 const BtnTrash = styled.button`
@@ -68,7 +72,7 @@ const EditContainer = styled.div`
     border-radius: 10px;
     flex-direction: column;
     padding: 10px;
-
+    z-index: 111;
   form {
     width: 100%;
     display: flex;
