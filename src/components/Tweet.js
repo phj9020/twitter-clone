@@ -28,7 +28,6 @@ const Container = styled.div`
     border-radius: 50%;
   }
 
- 
 `
 
 const BtnContainer = styled.div`

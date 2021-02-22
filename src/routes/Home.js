@@ -43,7 +43,7 @@ const Home = ({userObj})=> {
     useEffect(()=>{
         // getTweets();
         // Ver 2. 실시간  onSnapshot 데이터베이스에 무슨일이 있을 때 알림을 받음 
-        dbService.collection("tweets").onSnapshot(snapshot => {
+        dbService.collection("tweets").orderBy("createdAt", "desc").onSnapshot(snapshot => {
             //console.log(snapshot.docs)
             const tweetsArray= snapshot.docs.map(doc => ({
                 id: doc.id,

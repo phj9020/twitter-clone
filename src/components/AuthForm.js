@@ -38,6 +38,7 @@ const Form = styled.form`
 const ErrorMessage = styled.div`
     text-align: center;
     margin-bottom: 20px;
+    color: #e74c3c;
 `
 
 

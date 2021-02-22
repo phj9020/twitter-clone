@@ -98,7 +98,7 @@ const Profile = ({userObj, refreshUser})=>{
 
     const getMyTweet = async () =>{
         // get filtered tweet (my tweet)
-        const tweets = await dbService.collection("tweets").where("creatorId", "==", userObj.uid).orderBy("createdAt").get();
+        const tweets = await dbService.collection("tweets").where("creatorId", "==", userObj.uid).get();
         const mySaying = tweets.docs.map((doc) =>  doc.data());
         setMyTweets(mySaying);
     }
