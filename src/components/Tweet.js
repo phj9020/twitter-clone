@@ -77,17 +77,18 @@ const EditContainer = styled.div`
 
   input{
     all: unset;
-    width: 400px;
+    width: 300px;
     margin: 0px auto;
   }
   
   input[type=text] {
     height: 50px;
-    margin: 10px;
+    margin: 10px auto;
     border: 2px solid black;
     border-radius: 25px;
     font-size: 16px;
     font-weight: 500;
+    box-sizing: border-box;
   }
 
   input[type=submit]{
@@ -103,7 +104,7 @@ const EditContainer = styled.div`
 
   button {
     all:unset;
-    width: 400px;
+    width: 300px;
     height: 40px;
     margin: 0px auto;
     border-radius: 25px;
