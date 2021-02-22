@@ -3,9 +3,27 @@ import {dbService} from 'fbase';
 import Tweet from 'components/Tweet';
 import TweetFactory from "components/TweetFactory";
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 
+const Container = styled.div`
+    width: 100%;
+    height : calc( 100vh - 50px );
+    padding-top: 100px;
+`
 
+const Content = styled.div`
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+`
+
+const TweetList = styled.div`
+    width: 450px;
+    text-align: center;
+    position: relative;
+`
 
 
 
@@ -29,12 +47,14 @@ const Home = ({userObj})=> {
     },[])
 
     return(
-        <div>
-            <TweetFactory userObj={userObj} /> 
-            <div>
-                {tweets.map((item) => <Tweet key={item.id} tweetObj={item} isOwner={item.creatorId === userObj.uid}/>)}
-            </div>
-        </div>
+        <Container>
+            <Content>
+                <TweetFactory userObj={userObj} /> 
+                <TweetList>
+                    {tweets.map((item) => <Tweet key={item.id} tweetObj={item} isOwner={item.creatorId === userObj.uid}/>)}
+                </TweetList>
+            </Content>
+        </Container>
     )
 }
 
