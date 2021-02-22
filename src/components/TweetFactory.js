@@ -77,7 +77,7 @@ const ImagePreview = styled.div`
 const TweetFactory = ({userObj}) => {
     const [tweet, setTweet] = useState("");
     const [file, setFile] = useState("");
-
+    
     const onSubmit = async (event)=>{
         event.preventDefault();
         let fileUrl = "";
@@ -99,6 +99,7 @@ const TweetFactory = ({userObj}) => {
                 text : tweet,
                 createdAt: Date.now(),
                 creatorId: userObj.uid,
+                author: { username: userObj.displayName},
                 fileUrl: fileUrl
             }
             // 4. create collection in firestore 

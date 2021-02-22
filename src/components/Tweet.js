@@ -52,6 +52,12 @@ const BtnEdit = styled.button`
     top: 10px;
 `
 
+const Creator = styled.div`
+  position:absolute;
+  right: 10px;
+  bottom: 5px;
+`
+
 const EditContainer = styled.div`
     display: flex;
     width: 100%;
@@ -111,10 +117,10 @@ const EditContainer = styled.div`
 `
 
 
+
 const Tweet = ({ tweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newTweet, setNewTweet] = useState(tweetObj.text);
-  console.log(tweetObj);
 
   const onDeleteClick = () => {
     const ok = window.confirm("Are you sure you want to Delete this Tweet?");
@@ -145,6 +151,7 @@ const Tweet = ({ tweetObj, isOwner }) => {
       .doc(`${tweetObj.id}`)
       .update({ text: newTweet });
     setEditing(false);
+    
   };
 
   return (
@@ -179,6 +186,7 @@ const Tweet = ({ tweetObj, isOwner }) => {
               <BtnEdit onClick={toggleEditing}>✏️</BtnEdit>
             </BtnContainer>
           )}
+          <Creator>written by {tweetObj.author.username}</Creator>
         </Container>
       )}
     </>
