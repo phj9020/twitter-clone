@@ -16,7 +16,16 @@ const Content = styled.div`
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+`
 
+const LogoContainer = styled.div`
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+`
+const Logo = styled.img`
+    width: 50px;
+    height: 50px;
 `
 
 const TweetList = styled.div`
@@ -49,6 +58,9 @@ const Home = ({userObj})=> {
     return(
         <Container>
             <Content>
+                <LogoContainer>
+                    <Logo src={require("assets/twitterLogo.png").default} alt="logo" />
+                </LogoContainer>
                 <TweetFactory userObj={userObj} /> 
                 <TweetList>
                     {tweets.map((item) => <Tweet key={item.id} tweetObj={item} isOwner={item.creatorId === userObj.uid}/>)}
