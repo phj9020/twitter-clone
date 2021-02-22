@@ -78,7 +78,7 @@ const History = styled.div`
         overflow: hidden;
     }
     p {
-        font: normal 25px/100px "Times New Roman";
+        font: normal 18px/100px "Times New Roman";
         color: black;
     }
 `

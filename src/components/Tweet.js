@@ -14,7 +14,7 @@ const Container = styled.div`
 
   h4 {
     width: 100%;
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     text-indent: 10px;
