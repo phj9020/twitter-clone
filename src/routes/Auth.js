@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const SocialLogin = styled.div`
     button {
-        width: 225px;
+        width: 180px;
         height: 50px;
         margin-right: 10px;
         cursor: pointer;

@@ -29,7 +29,7 @@ const Logo = styled.img`
 `
 
 const TweetList = styled.div`
-    width: 450px;
+    width: 375px;
     text-align: center;
     position: relative;
 `

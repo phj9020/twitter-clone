@@ -10,7 +10,7 @@ const Container = styled.div`
 `
 
 const Form = styled.form`
-    width: 450px;
+    width: 375px;
     flex-direction: column;
     margin: 0px auto;
 
@@ -39,7 +39,7 @@ const Form = styled.form`
 
 const LogoutBtn = styled.button`
     all: unset;
-    width: 450px;
+    width: 375px;
     height: 50px;
     background-color: tomato;
     border-radius: 25px;
@@ -65,7 +65,7 @@ const History = styled.div`
         top: 50px;
     }
     ul{
-        width: 450px;
+        width: 375px;
         margin: 0px auto;
     }
     li{

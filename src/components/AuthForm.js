@@ -21,7 +21,7 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     input {
-        width: 450px;
+        width: 375px;
         height: 40px;
         text-indent: 10px;
         border-radius: 15px;

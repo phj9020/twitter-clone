@@ -13,7 +13,7 @@ const Form = styled.form`
     top: 0;
 
     input[type=text] {
-        width: 450px;
+        width: 375px;
         height: 40px;
         text-indent: 10px;
         border-radius: 20px;
